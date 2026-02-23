@@ -12,22 +12,34 @@ class CMD:
     SHOW = '3'
     COMPLETE = '4'
     EXIT = '5'
-todos = []
+
+def get_todos():
+    file = open('todos.txt', 'r')
+    todos = file.readlines()
+    file.close()
+    return todos
 
 def add_todo():
-    todo = input('enter a todo:')
+    todos = get_todos()
+    todo = input('enter a todo:') + '\n'
     todos.append(todo)
+    new_file = open('todos.txt', 'w')
+    new_file.writelines(todos)
+    new_file.close()
 
 def edit_todos():
+    todos = get_todos()
     to_do_id = int(input('enter a id to edit: '))
     todo = input('enter new todo:')
     todos[to_do_id - 1] = todo
 
 def show_todos():
+    todos = get_todos()
     for index, todo in enumerate(todos, start=1):
         print(f"{index}-{todo.title()}")
 
 def complete_todos():
+    todos = get_todos()
     to_do_id = int(input('enter a id to edit: '))
     complete = todos.pop(to_do_id - 1)
     print(f"completed: {complete}")
