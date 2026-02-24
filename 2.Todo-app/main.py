@@ -16,32 +16,37 @@ class CMD:
 def get_todos():
     with open('todos.txt', 'r') as file:
         todos = file.readlines()
-    return todos
+    return [todo.strip() for todo in todos]
+
+def write_todos(todos):
+    with open('todos.txt', 'w') as file:
+        file.writelines([todo.strip() + '\n' for todo in todos])
 
 def add_todo():
     todos = get_todos()
     todo = input('enter a todo:') + '\n'
     todos.append(todo)
-    with open('todos.txt', 'w') as file:
-        file.writelines(todos)
+    write_todos(todos)
 
 def edit_todos():
     todos = get_todos()
-    to_do_id = int(input('enter a id to edit: '))
-    todo = input('enter new todo:')
-    todos[to_do_id - 1] = todo
+    todo_id = int(input('enter a id to edit: '))
+    todo = input('enter new todo:') + '\n'
+    todos[todo_id - 1] = todo
+    write_todos(todos)
 
 def show_todos():
     todos = get_todos()
 
     for index, todo in enumerate(todos, start=1):
-        print(f"{index}-{todo.strip().title()}")
+        print(f"{index}-{todo.title()}")
 
 def complete_todos():
     todos = get_todos()
-    to_do_id = int(input('enter a id to edit: '))
-    complete = todos.pop(to_do_id - 1)
-    print(f"completed: {complete}")
+    todo_id = int(input('enter a id to edit: '))
+    complete = todos.pop(todo_id - 1)
+    write_todos(todos)
+    print(f"completed: {todo_id}-{complete}")
     print("Left todo:")
     show_todos()
 
@@ -56,5 +61,5 @@ while True:
             show_todos()
         case CMD.COMPLETE:
             complete_todos()
-        case EXIT:
+        case CMD.EXIT:
             break
