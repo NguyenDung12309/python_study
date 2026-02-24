@@ -14,18 +14,16 @@ class CMD:
     EXIT = '5'
 
 def get_todos():
-    file = open('todos.txt', 'r')
-    todos = file.readlines()
-    file.close()
+    with open('todos.txt', 'r') as file:
+        todos = file.readlines()
     return todos
 
 def add_todo():
     todos = get_todos()
     todo = input('enter a todo:') + '\n'
     todos.append(todo)
-    new_file = open('todos.txt', 'w')
-    new_file.writelines(todos)
-    new_file.close()
+    with open('todos.txt', 'w') as file:
+        file.writelines(todos)
 
 def edit_todos():
     todos = get_todos()
