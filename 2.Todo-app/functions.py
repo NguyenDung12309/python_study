@@ -7,9 +7,8 @@ def write_todos(todos):
     with open('todos.txt', 'w') as file:
         file.writelines([todo.strip() + '\n' for todo in todos])
 
-def add_todo():
+def add_todo(todo):
     todos = get_todos()
-    todo = input('enter a todo:') + '\n'
     todos.append(todo)
     write_todos(todos)
 
