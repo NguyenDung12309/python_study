@@ -43,7 +43,7 @@ def show_todos():
 
 def complete_todos():
     todos = get_todos()
-    todo_id = int(input('enter a id to edit: '))
+    todo_id = int(input('enter a id to edit:  '))
     complete = todos.pop(todo_id - 1)
     write_todos(todos)
     print(f"completed: {todo_id}-{complete}")
