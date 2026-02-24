@@ -35,8 +35,9 @@ def edit_todos():
 
 def show_todos():
     todos = get_todos()
+
     for index, todo in enumerate(todos, start=1):
-        print(f"{index}-{todo.title()}")
+        print(f"{index}-{todo.strip().title()}")
 
 def complete_todos():
     todos = get_todos()
