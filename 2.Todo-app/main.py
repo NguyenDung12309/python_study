@@ -1,4 +1,4 @@
-prompt = """Enter command:
+prompt = """choose command number:
 1. add
 2. edit
 3. show
@@ -29,11 +29,14 @@ def add_todo():
     write_todos(todos)
 
 def edit_todos():
-    todos = get_todos()
-    todo_id = int(input('enter a id to edit: '))
-    todo = input('enter new todo:') + '\n'
-    todos[todo_id - 1] = todo
-    write_todos(todos)
+    try:
+        todos = get_todos()
+        todo_id = int(input('enter a id to edit: '))
+        todo = input('enter new todo:') + '\n'
+        todos[todo_id - 1] = todo
+        write_todos(todos)
+    except ValueError:
+        print('invalid id')
 
 def show_todos():
     todos = get_todos()
@@ -42,13 +45,16 @@ def show_todos():
         print(f"{index}-{todo.title()}")
 
 def complete_todos():
-    todos = get_todos()
-    todo_id = int(input('enter a id to edit: '))
-    complete = todos.pop(todo_id - 1)
-    write_todos(todos)
-    print(f"completed: {todo_id}-{complete}")
-    print("Left todo:")
-    show_todos()
+    try:
+        todos = get_todos()
+        todo_id = int(input('enter a id to edit: '))
+        complete = todos.pop(todo_id - 1)
+        write_todos(todos)
+        print(f"completed: {todo_id}-{complete}")
+        print("Left todo:")
+        show_todos()
+    except ValueError:
+        print('invalid id')
 
 while True:
     action = input(prompt).strip()
@@ -62,4 +68,7 @@ while True:
         case CMD.COMPLETE:
             complete_todos()
         case CMD.EXIT:
+            break
+        case whatever:
+            print('command not valid')
             break
