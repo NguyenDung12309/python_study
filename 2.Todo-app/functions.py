@@ -12,33 +12,21 @@ def add_todo(todo):
     todos.append(todo)
     write_todos(todos)
 
-def edit_todos():
-    try:
+def edit_todos(index, todo):
         todos = get_todos()
-        todo_id = int(input('enter a id to edit: '))
-        todo = input('enter new todo:') + '\n'
-        todos[todo_id - 1] = todo
+        todos[index] = todo
         write_todos(todos)
-    except ValueError:
-        print('invalid id')
 
 def show_todos():
     todos = get_todos()
 
-    for index, todo in enumerate(todos, start=1):
+    for index, todo in enumerate(todos):
         print(f"{index}-{todo.title()}")
 
-def complete_todos():
-    try:
+def complete_todos(index):
         todos = get_todos()
-        todo_id = int(input('enter a id to edit: '))
-        complete = todos.pop(todo_id - 1)
+        todos.pop(index)
         write_todos(todos)
-        print(f"completed: {todo_id}-{complete}")
-        print("Left todo:")
-        show_todos()
-    except ValueError:
-        print('invalid id')
 
 print(__name__)
 if __name__ == '__main__':

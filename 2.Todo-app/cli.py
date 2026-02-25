@@ -8,11 +8,20 @@ while True:
             todo = input('enter a todo:') + '\n'
             functions.add_todo(todo)
         case const.CMD.EDIT:
-            functions.edit_todos()
+            try:
+                todo_id = int(input('enter a id to edit: '))
+                todo = input('enter new todo:') + '\n'
+                functions.edit_todos(todo_id, todo)
+            except ValueError:
+                print('invalid input')
         case const.CMD.SHOW:
             functions.show_todos()
         case const.CMD.COMPLETE:
-            functions.complete_todos()
+            try:
+                todo_id = int(input('enter a id to edit: '))
+                functions.complete_todos(todo_id)
+            except ValueError:
+                print('invalid input')
         case const.CMD.EXIT:
             break
         case whatever:

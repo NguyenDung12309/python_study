@@ -19,3 +19,5 @@ class CMD_GUI:
     SHOW = 'Show'
     COMPLETE = 'Complete'
     EXIT = 'Exit'
+    TODOS = 'Todos'
+    TODO = 'Todo'
